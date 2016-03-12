@@ -10,7 +10,7 @@ EXPOSE 80
 RUN apk add --no-cache \
     python python-dev py-pip \
     gcc musl-dev linux-headers \
-    augeas-dev openssl-dev libffi-dev ca-certificates dialog \
+    augeas-dev openssl-dev libffi-dev ca-certificates dialog
 
 # -----------------------------------------------------------------------------
 # Install letsencrypt client through pip
