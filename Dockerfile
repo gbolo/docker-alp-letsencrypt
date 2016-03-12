@@ -21,6 +21,7 @@ RUN pip install -U letsencrypt
 # Prepare and configure
 # -----------------------------------------------------------------------------
 COPY letsencrypt-cron.sh /etc/periodic/daily/letsencrypt-cron.sh
+COPY entrypoint.sh /root/entrypoint.sh
 
 # -----------------------------------------------------------------------------
 # Set Volumes
@@ -30,4 +31,5 @@ VOLUME ["/config", "/etc/letsencrypt"]
 # -----------------------------------------------------------------------------
 # run crond
 # -----------------------------------------------------------------------------
-CMD ["/usr/bin/crond"]
+#CMD ["/usr/sbin/crond"]
+ENTRYPOINT ["/root/entrypoint.sh"]
