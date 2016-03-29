@@ -68,6 +68,7 @@ function RENEW_FROM_CONFIGS {
 #############################################################
 function main {
 
+  echo "[INFO] EXECUTION BEGAN: `date`";
   RENEW_FROM_CONFIGS;
   RENEW_CERTS;
   
