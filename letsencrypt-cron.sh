@@ -11,7 +11,7 @@
 #############################################################
 FROM_CONFIG='false';
 FORCE_RENEWAL='false';
-LETSENCRYPT_BIN_BIN=/usr/bin/certbot
+LETSENCRYPT_BIN=/usr/bin/certbot
 
 #############################################################
 ## PARSE THE ARGUMENTS PROVIDED BY USER
