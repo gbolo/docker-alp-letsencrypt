@@ -11,6 +11,7 @@
 #############################################################
 FROM_CONFIG='false';
 FORCE_RENEWAL='false';
+LETSENCRYPT_BIN_BIN=/usr/bin/certbot
 
 #############################################################
 ## PARSE THE ARGUMENTS PROVIDED BY USER
@@ -34,9 +35,9 @@ function RENEW_CERTS {
 	echo "[INFO] Starting renewal of existing certs";
 	if [[ "$FORCE_RENEWAL" = "true" ]]; then
 		echo "[WARN] FORCE renewal selected";
-		letsencrypt renew --force-renewal --standalone --standalone-supported-challenges http-01;
+		$LETSENCRYPT_BIN renew --force-renewal --standalone --standalone-supported-challenges http-01;
 	else
-		letsencrypt renew --standalone --standalone-supported-challenges http-01;
+		$LETSENCRYPT_BIN renew --standalone --standalone-supported-challenges http-01;
 	fi
 }
 
@@ -51,12 +52,12 @@ function RENEW_FROM_CONFIGS {
 	if [[ "$FORCE_RENEWAL" = "true" ]]; then
 		for CONF in `ls /config/*.conf`; do
 			echo "[WARN] FORCE renewal selected for $CONF";
-			letsencrypt certonly --force-renewal --agree-tos -c $CONF;
+			$LETSENCRYPT_BIN certonly --force-renewal --agree-tos -c $CONF;
 		done
 	else
 		for CONF in `ls /config/*.conf`; do
 			echo "[INFO] working on $CONF";
-			letsencrypt certonly --keep-until-expiring --agree-tos -c $CONF;
+			$LETSENCRYPT_BIN certonly --keep-until-expiring --agree-tos -c $CONF;
 		done
 	fi
 
