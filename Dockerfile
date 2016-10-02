@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 
 MAINTAINER George Bolo <gbolo@linuxctl.com>
 
@@ -8,14 +8,7 @@ EXPOSE 80
 # Install our dependancies
 # -----------------------------------------------------------------------------
 RUN apk add --no-cache \
-    bash python python-dev py-pip \
-    gcc musl-dev linux-headers \
-    augeas-dev openssl-dev libffi-dev ca-certificates dialog
-
-# -----------------------------------------------------------------------------
-# Install letsencrypt client through pip
-# -----------------------------------------------------------------------------
-RUN pip install -U letsencrypt
+    bash python certbot
 
 # -----------------------------------------------------------------------------
 # Prepare and configure
