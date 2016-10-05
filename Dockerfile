@@ -13,7 +13,8 @@ RUN apk add --no-cache \
 # -----------------------------------------------------------------------------
 # Prepare and configure
 # -----------------------------------------------------------------------------
-COPY letsencrypt-cron.sh /etc/periodic/daily/letsencrypt-cron.sh
+# remove .sh extension because run-parts wont run scripts with extensions
+COPY letsencrypt-cron.sh /etc/periodic/daily/letsencrypt-cron
 COPY entrypoint.sh /root/entrypoint.sh
 
 # -----------------------------------------------------------------------------
@@ -24,5 +25,5 @@ VOLUME ["/config", "/etc/letsencrypt"]
 # -----------------------------------------------------------------------------
 # run crond
 # -----------------------------------------------------------------------------
-#CMD ["/usr/sbin/crond"]
+# user a wrapper script so when can run something each time the container is started
 ENTRYPOINT ["/root/entrypoint.sh"]
